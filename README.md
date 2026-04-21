@@ -87,7 +87,7 @@ The router LLM only sees the sources the role is permitted to use — it cannot 
 ---
 
 ### 4. Router LLM — Prompt classification
-**Suggested owner:** backend group member B
+**Suggested owner:** Tauseef
 
 The first LLM call. Takes the user's message and returns a category string.
 
