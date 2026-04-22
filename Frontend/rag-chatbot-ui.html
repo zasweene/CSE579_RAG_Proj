@@ -393,7 +393,7 @@ body::after {
 <script>
 const CFG = {
   manager:  { label:'Manager',  init:'MG', accent:'#c9a96e', adim:'rgba(201,169,110,0.12)',
-    dbs:[{n:'Employee DB',on:true},{n:'CRM / Leads',on:true},{n:'Analytics',on:true},{n:'HR Policies',on:true},{n:'Internal Docs',on:true},{n:'Web Search',on:true},{n:'Audit Logs',on:false}],
+    dbs:[{n:'Employee DB',on:true},{n:'Analytics',on:true},{n:'HR Policies',on:true},{n:'Internal Docs',on:true},{n:'Web Search',on:true},{n:'Audit Logs',on:false}],
     chips:["Show me this month's open leads","Who took the most PTO in Q1?","Summarize our refund policy","What's the current fed funds rate?"],
     routes:['employee_db','crm_leads','analytics','hr_policies','internal_docs','web_search'] },
   employee: { label:'Employee', init:'EM', accent:'#6eb5c9', adim:'rgba(110,181,201,0.12)',
@@ -405,7 +405,7 @@ const CFG = {
     chips:["List employees due for review","What's our current headcount?","Summarize compliance checklist","Show open positions in engineering"],
     routes:['employee_db','hr_policies','internal_docs','web_search'] },
   admin:    { label:'Admin',    init:'AD', accent:'#c96e6e', adim:'rgba(201,110,110,0.12)',
-    dbs:[{n:'Employee DB',on:true},{n:'CRM / Leads',on:true},{n:'Analytics',on:true},{n:'HR Policies',on:true},{n:'Internal Docs',on:true},{n:'Web Search',on:true},{n:'Audit Logs',on:true}],
+    dbs:[{n:'Employee DB',on:true},{n:'Analytics',on:true},{n:'HR Policies',on:true},{n:'Internal Docs',on:true},{n:'Web Search',on:true},{n:'Audit Logs',on:true}],
     chips:["Show system audit log for today","What databases are currently indexed?","List all active user sessions","Run a cross-DB usage report"],
     routes:['employee_db','crm_leads','analytics','hr_policies','internal_docs','web_search','audit_logs'] },
 };
@@ -492,25 +492,33 @@ function submit() {
   msgs.appendChild(t);
   msgs.scrollTop = msgs.scrollHeight;
 
-  setTimeout(() => {
+  fetch('http://127.0.0.1:8000/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: text, role: role })
+  })
+  .then(r => r.json())
+  .then(data => {
     document.getElementById('thinking')?.remove();
-    const rtag = c.routes[Math.floor(Math.random()*c.routes.length)];
-    const replies = [
-      `I've received your query and routed it to the appropriate data source for your ${c.label} access level. In the full implementation, this is where the middleware would return a synthesized response from the relevant knowledge base.`,
-      `Based on your ${c.label} permissions, I queried the relevant databases and would return the results here. The RAG pipeline is ready to be wired up to this interface.`,
-      `Understood — I've categorized your prompt and dispatched it to the correct retrieval chain. Once the backend is connected, real data will populate here.`,
-      `Routing complete. Your ${c.label} role grants access to the relevant sources for this query. The middleware layer will process and return results in this space.`,
-    ];
-    const reply = replies[Math.floor(Math.random()*replies.length)];
     const now = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
     const a = document.createElement('div');
     a.className = 'mrow ai';
-    a.innerHTML = `<div class="av ai">AI</div><div class="mc"><div class="ms">nexusai</div><div class="bbl">${x(reply)}</div><div class="mmeta"><span>${now}</span><span class="rtag">→ ${rtag}</span></div></div>`;
+    a.innerHTML = `<div class="av ai">AI</div><div class="mc"><div class="ms">nexusai</div><div class="bbl">${x(data.reply)}</div><div class="mmeta"><span>${now}</span><span class="rtag">→ ${data.route}</span></div></div>`;
     msgs.appendChild(a);
     msgs.scrollTop = msgs.scrollHeight;
+  })
+  .catch(err => {
+    document.getElementById('thinking')?.remove();
+    const a = document.createElement('div');
+    a.className = 'mrow ai';
+    a.innerHTML = `<div class="av ai">AI</div><div class="mc"><div class="ms">nexusai</div><div class="bbl" style="color:var(--red)">Error: Could not reach backend. Is the server running?</div></div>`;
+    msgs.appendChild(a);
+    msgs.scrollTop = msgs.scrollHeight;
+  })
+  .finally(() => {
     busy = false;
     document.getElementById('ta').focus();
-  }, 900 + Math.random()*600);
+  });
 }
 
 function onKey(e) { if (e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit();} }
