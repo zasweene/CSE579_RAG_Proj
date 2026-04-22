@@ -1,0 +1,119 @@
+NexusAI Setup Guide
+===================
+
+PREREQUISITES
+-------------
+Install the following before starting:
+  - Python 3.9+       https://www.python.org/downloads/
+  - PostgreSQL        brew install postgresql
+  - Ollama            https://ollama.com
+
+
+STEP 1 — Clone the Repository
+------------------------------
+  git clone https://github.com/zasweene/CSE579_RAG_Proj
+  cd CSE579_RAG_Proj
+
+
+STEP 2 — Install Python Dependencies
+--------------------------------------
+  pip install fastapi uvicorn psycopg2-binary python-dotenv requests pymupdf faker
+
+
+STEP 3 — Pull Ollama Models
+----------------------------
+  ollama pull llama3.2
+  ollama pull nomic-embed-text
+
+
+STEP 4 — Set Up PostgreSQL
+---------------------------
+  brew services start postgresql
+  createdb nexusai
+  psql -d nexusai -c "CREATE EXTENSION vector;"
+
+
+STEP 5 — Configure Environment
+--------------------------------
+  cd Middleware
+  echo "POSTGRES_URL=postgresql://YOUR_MAC_USERNAME@localhost:5432/nexusai" > .env
+  echo "SQLITE_PATH=./db/hr_policies.db" >> .env
+
+  Replace YOUR_MAC_USERNAME with your actual Mac username.
+  Not sure? Run: whoami
+
+
+STEP 6 — Add Your Data
+------------------------
+Place your data files in Middleware/data/:
+
+  Middleware/data/
+    employees.csv
+    handbook-on-flexibilities-for-childbirth-adoption-and-foster-care-2025.pdf
+    opm-workforce-reshaping-march-2017.pdf
+    ses-exit-survey-results.pdf
+    Valve_NewEmployeeHandbook.pdf
+
+Your employees.csv must have these exact column headers:
+  emp_no, birth_date, first_name, last_name, sex, hire_date,
+  salary, dept_no, dept_name, emp_manager, title_id, title
+
+
+STEP 7 — Seed the Databases
+-----------------------------
+  python seed/seed_employee.py
+  python seed/seed_hr.py
+  python seed/seed_docs.py
+
+  NOTE: seed_docs.py will take 5-15 minutes depending on PDF size. This is normal.
+
+
+STEP 8 — Run the Application
+------------------------------
+Open TWO terminal windows:
+
+  Terminal 1 - Start Ollama:
+    ollama serve
+    (If you see "address already in use", Ollama is already running. Ignore it.)
+
+  Terminal 2 - Start the backend:
+    cd Middleware
+    uvicorn main:app --reload --port 8000
+
+
+STEP 9 — Open the Frontend
+----------------------------
+  open Frontend/rag-chatbot-ui.html
+
+  Or just double-click the file in Finder.
+
+
+STEP 10 — Verify Everything Works
+------------------------------------
+  Ollama:   http://localhost:11434
+  Backend:  http://127.0.0.1:8000/health  (should return {"status": "ok"})
+  Frontend: Select a role and send a message
+
+
+TROUBLESHOOTING
+---------------
+  Error: database does not exist
+    Fix: createdb nexusai
+
+  Error: extension "vector" not available
+    Fix: brew install pgvector, then restart postgres
+
+  Error: model not found
+    Fix: run "ollama list" and update model name in main.py
+
+  Error: address already in use (port 11434)
+    Fix: Ollama already running, ignore it
+
+  Error: address already in use (port 8000)
+    Fix: lsof -i :8000, then kill -9 PID
+
+  seed_docs.py hanging
+    Fix: Normal, wait 5-15 mins for embeddings to finish
+
+  CORS error in browser
+    Fix: Run "python -m http.server 3000" and open http://localhost:3000
