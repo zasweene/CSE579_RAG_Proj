@@ -1,17 +1,15 @@
 import psycopg2, os, fitz, requests
 from dotenv import load_dotenv
 load_dotenv()
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def extract_pdf(path):
     doc = fitz.open(path)
     return "\n".join(page.get_text() for page in doc)
 
-def chunk_text(text, size=100, overlap=20):
-    words = text.split()
-    chunks = []
-    for i in range(0, len(words), size - overlap):
-        chunks.append(" ".join(words[i:i+size]))
-    return chunks
+def chunk_text(text):
+    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    return splitter.split_text(text)
 
 def get_embedding(text):
     r = requests.post("http://localhost:11434/api/embeddings", json={
