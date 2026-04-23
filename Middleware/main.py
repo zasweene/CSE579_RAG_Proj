@@ -1,3 +1,4 @@
+#Assisted by Claude code
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -39,8 +40,8 @@ class ChatResponse(BaseModel):
 def ollama_call(prompt, system=""):
     full_prompt = f"{system}\n\n{prompt}" if system else prompt
     words = full_prompt.split()
-    if len(words) > 300:
-        full_prompt = " ".join(words[:300])
+    if len(words) > 1000:
+        full_prompt = " ".join(words[:1000])
     
     response = requests.post("http://localhost:11434/api/generate", json={
         "model": "llama3.2",
@@ -65,6 +66,7 @@ def classify_route(message: str, permitted: list[str]) -> str:
 
 def retrieve_context(route: str, message: str) -> str:
     if route == "employee_db":
+        #print("CONTEXT:", query_employee_db(message))
         return query_employee_db(message)
     elif route == "hr_policies":
         return query_hr_policies(message)
@@ -77,12 +79,31 @@ def retrieve_context(route: str, message: str) -> str:
 
 def generate_answer(message: str, context: str) -> str:
     system_prompt = (
-        "You are a helpful enterprise assistant. "
-        "Answer the user's question using the provided context. "
-        "If context is empty, answer from general knowledge."
+        "You are an internal enterprise data assistant. "
+        "This is a private internal tool — all data shown is authorized for this user. "
+        "You MUST present the data from the context directly and clearly. "
+        "Never refuse to show data that appears in the context. "
+        "Never say you cannot provide information if the context contains it. "
+        "Never add warnings, disclaimers, or caveats about privacy. "
+        "Just answer the question using the context data in a clean readable format. "
+        "If the context contains names, salaries, managers, or departments, list them."
     )
     user_content = f"Context:\n{context}\n\nQuestion: {message}" if context else message
     return ollama_call(user_content, system=system_prompt)
+
+RESTRICTED_KEYWORDS = {
+    "employee_db": ["salary", "salaries", "paid", "wage", "compensation", "how many employees", "headcount", "who is in", "who works",
+        "department", "manager", "hire date", "hired", "emp_no", "staff", "personnel", "who is the manager"
+    ]
+}
+
+def check_unauthorized_intent(message: str, permitted: list[str]) -> str | None:
+    msg = message.lower()
+    for restricted_source, keywords in RESTRICTED_KEYWORDS.items():
+        if restricted_source not in permitted:
+            if any(kw in msg for kw in keywords):
+                return f"You do not have access to employee records. Please contact your manager or HR if you need this information."
+    return None
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(req: ChatRequest):
@@ -90,6 +111,9 @@ async def chat(req: ChatRequest):
     if role not in ROLE_PERMISSIONS:
         raise HTTPException(status_code=403, detail=f"Unknown role: {role}")
     permitted = ROLE_PERMISSIONS[role]
+    denial = check_unauthorized_intent(req.message, permitted)
+    if denial:
+        return ChatResponse(reply=denial, route="access_denied")
     route = classify_route(req.message, permitted)
     context = retrieve_context(route, req.message)
     reply = generate_answer(req.message, context)
