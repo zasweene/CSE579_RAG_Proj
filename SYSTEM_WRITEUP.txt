@@ -1,0 +1,135 @@
+NexusAI — System Flow & Architecture
+======================================
+
+
+OVERVIEW
+--------
+NexusAI is a Retrieval-Augmented Generation (RAG) chatbot designed for internal
+enterprise use. It routes user questions to the correct data source based on who
+is asking and what they are asking about. The system is made up of three layers:
+a browser-based frontend, a Python middleware server, and a set of knowledge bases.
+
+
+THE THREE LAYERS
+----------------
+
+  1. Frontend (rag-chatbot-ui.html)
+     A single HTML file that runs in any browser. The user selects their role
+     and types a message. The frontend sends that message and role to the
+     middleware and displays whatever comes back.
+
+  2. Middleware (main.py)
+     A Python FastAPI server that receives the message, figures out where to
+     look for an answer, retrieves relevant information, and generates a response.
+     This is where all the intelligence lives.
+
+  3. Data Layer
+     A set of databases storing employee records, HR policies, and internal
+     documents. The middleware queries these based on what the user asked.
+
+
+STEP BY STEP FLOW
+-----------------
+
+  Step 1 — User selects a role
+     When the app opens, the user picks a role: Employee, HR, Manager, or Admin.
+     Each role has a different set of databases it is allowed to access. For
+     example, an Employee can only see HR policies and internal docs, while a
+     Manager can also see employee records and analytics.
+
+  Step 2 — User sends a message
+     The user types a question and hits send. The frontend packages the message
+     and role into a POST request and sends it to the middleware at port 8000.
+
+  Step 3 — Access control check
+     The middleware receives the request and immediately checks what databases
+     that role is permitted to query. This list is locked in before anything
+     else happens. The router LLM will only ever see the sources the role is
+     allowed to use, so it is impossible to route around the access rules.
+
+  Step 4 — Router LLM classifies the query
+     The middleware sends the user's message to a local LLM (llama3.2 via Ollama)
+     with a short instruction: "respond with only one of these tags." The tags
+     correspond to the permitted data sources for that role. The model reads the
+     message and returns a single tag like "hr_policies" or "employee_db" that
+     tells the system where to look.
+
+     Examples:
+       "How many vacation days do I get?"  →  hr_policies
+       "What is Sarah's salary?"           →  employee_db
+       "What is the current prime rate?"   →  web_search
+       "Summarize this for me"             →  general_llm
+
+  Step 5 — Retriever fetches relevant context
+     Based on the route tag, the middleware queries the appropriate data source.
+
+       employee_db   — searches PostgreSQL employees table by name, department,
+                       or salary depending on keywords in the message
+       hr_policies   — searches SQLite policies table for matching topics
+       internal_docs — converts the message into an embedding vector and finds
+                       the most semantically similar document chunks in PostgreSQL
+                       using pgvector
+       web_search    — queries the DuckDuckGo API for live information
+       general_llm   — skips retrieval entirely and answers from model knowledge
+
+  Step 6 — Response LLM generates the answer
+     The retrieved context and the original question are passed to the LLM
+     together. The model is instructed to answer using the provided context.
+     This grounds the response in real data rather than guessing.
+
+  Step 7 — Response is returned to the frontend
+     The middleware sends back a JSON object containing the answer text and the
+     route tag that was used. The frontend displays the answer in the chat window
+     and shows the route tag so the user can see which data source was queried.
+
+
+DATA SOURCES
+------------
+
+  Employee DB (PostgreSQL)
+    Stores employee records including name, department, title, salary, hire date,
+    and manager. Queried using keyword matching on the user's message.
+
+  HR Policies (SQLite)
+    Stores company policy documents as text chunks organized by topic. Queried
+    using keyword search across topic and content fields.
+
+  Internal Docs (PostgreSQL + pgvector)
+    Stores chunked text from internal PDF documents alongside their embedding
+    vectors. Queried using semantic similarity search — the user's message is
+    converted to a vector and compared against all stored chunks to find the
+    most relevant passages.
+
+  Web Search (DuckDuckGo API)
+    Used for questions requiring live or external information. No API key needed.
+
+  General LLM (Ollama)
+    Fallback for open-ended questions that do not require any database lookup.
+    The model answers directly from its own knowledge.
+
+
+LOCAL LLM SETUP
+---------------
+NexusAI runs entirely on your machine using Ollama. No API keys or internet
+connection are required for the core functionality. Two models are used:
+
+  llama3.2         — handles query routing and answer generation
+  nomic-embed-text — converts text into vectors for semantic search
+
+
+WHY RAG?
+--------
+A plain LLM has no access to your company's private data and can hallucinate
+answers. RAG solves this by retrieving real information first and handing it
+to the model as context. The model then generates a response grounded in that
+retrieved data rather than guessing. This makes answers more accurate, more
+up to date, and traceable back to a specific source.
+
+
+ROLES AND PERMISSIONS
+---------------------
+
+  Employee   hr_policies, internal_docs, web_search, general_llm
+  HR         employee_db, hr_policies, internal_docs, web_search, general_llm
+  Manager    employee_db, hr_policies, internal_docs, web_search, general_llm, analytics
+  Admin      all of the above + audit_logs
