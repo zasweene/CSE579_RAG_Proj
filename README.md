@@ -1,4 +1,4 @@
-# NexusAI (Name pending) — System Architecture
+# NexusAI — System Architecture
 
 ## Overview
 
