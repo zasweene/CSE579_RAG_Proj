@@ -3,18 +3,16 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+#path to db
 DB_PATH = os.getenv("SQLITE_PATH", "./db/hr_policies.db")
 
+#format and execute the query
 def query_hr_policies(message: str) -> str:
-    """
-    Table schema expected:
-      policies(id, topic, content)
-    Keyword search over topic and content.
-    """
     keywords = message.lower().split()
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
+    #execute the query 
     results = []
     for kw in keywords:
         cur.execute("""
@@ -25,7 +23,7 @@ def query_hr_policies(message: str) -> str:
 
     conn.close()
 
-    # Deduplicate
+    #Deduplicate
     seen = set()
     unique = []
     for topic, content in results:
@@ -33,7 +31,9 @@ def query_hr_policies(message: str) -> str:
             seen.add(topic)
             unique.append((topic, content))
 
+    #catch for no match
     if not unique:
         return "No matching HR policies found."
 
+    #format and return
     return "\n\n".join(f"[{topic}]\n{content}" for topic, content in unique[:5])
