@@ -1,7 +1,7 @@
 import requests
 
+#query the web, using keyless duckduckgo API
 def query_web_search(message: str) -> str:
-    """Uses DuckDuckGo instant answer API — no key needed."""
     try:
         response = requests.get(
             "https://api.duckduckgo.com/",
@@ -29,5 +29,6 @@ def query_web_search(message: str) -> str:
 
         return "\n\n".join(results)
 
+    #except if webssearch fails
     except Exception as e:
         return f"Web search failed: {str(e)}"
