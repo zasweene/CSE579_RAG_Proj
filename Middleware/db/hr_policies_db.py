@@ -34,6 +34,10 @@ def query_hr_policies(message: str) -> str:
     #catch for no match
     if not unique:
         return "No matching HR policies found."
+    
+    formatted = ""
+    for topic, content in unique[:5]:
+        formatted += f"\n---\nPolicy: {topic}\nContent: {content}\n"
 
     #format and return
-    return "\n\n".join(f"[{topic}]\n{content}" for topic, content in unique[:5])
+    return f"Found {len(unique)} matching policy section(s):{formatted}"
