@@ -26,7 +26,6 @@ class ChatRequest(BaseModel):
     message: str
     role: str
 
-# Define roles and permitted databases per the system architecture
 ROLE_PERMISSIONS = {
     "Employee": ["hr_policies", "internal_docs", "web_search", "general_llm"],
     "HR": ["employee_db", "hr_policies", "internal_docs", "web_search", "general_llm"],
@@ -34,7 +33,6 @@ ROLE_PERMISSIONS = {
     "Admin": ["employee_db", "hr_policies", "internal_docs", "web_search", "general_llm", "analytics", "audit_logs"]
 }
 
-# Global ML model variables
 embedder = None
 classifier = None
 
@@ -42,7 +40,6 @@ classifier = None
 async def load_models():
     global embedder, classifier
     print("Loading embedding model (all-MiniLM-L6-v2)...")
-    # Using a fast, lightweight sentence transformer for intent classification
     embedder = SentenceTransformer('all-MiniLM-L6-v2')
     
     print("Loading trained intent classifier...")
@@ -86,9 +83,6 @@ def retrieve_from_db(route: str, query: str) -> str:
         print(f"Database Error for route {route}: {e}")
         return "System error: Could not retrieve data from the database."
 
-# -------------------------------------------------------------------
-# 4. MAIN CHAT ENDPOINT
-# -------------------------------------------------------------------
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
     if not classifier or not embedder:
@@ -96,7 +90,6 @@ async def chat_endpoint(request: ChatRequest):
     
     user_message = request.message
     
-    # Normalize incoming role (e.g. 'employee' -> 'Employee', 'hr' -> 'HR')
     role_map = {
         "employee": "Employee", 
         "hr": "HR", 
@@ -113,26 +106,15 @@ async def chat_endpoint(request: ChatRequest):
     allowed_routes = ROLE_PERMISSIONS[user_role]
     
     try:
-        # --- Step 2: ML Route Prediction (Replaces LLM Router) ---
-        # Vectorize the user's message
         vector = embedder.encode([user_message])
-        # Predict the exact database tag
         predicted_route = classifier.predict(vector)[0]
         
-        # --- Step 3: Enforce Access Control ---
-        # Crucial security check: The ML model doesn't know about roles.
-        # If it predicts a database the user isn't allowed to see, we intercept it.
         if predicted_route not in allowed_routes:
             print(f"⚠️ Access Denied: {user_role} attempted to access {predicted_route}.")
-            # Force route to general_llm so it just answers like a normal chatbot
-            # without accessing sensitive restricted databases.
             predicted_route = "general_llm"
             
-        # --- Step 4: Retrieve Context ---
         context = retrieve_from_db(predicted_route, user_message)
-        
-        # --- Step 5: Generate Final Answer with Local LLM ---
-        # We pass the retrieved data to the LLM to ground its response.
+
         if predicted_route == "general_llm":
             prompt = user_message
         else:
@@ -149,7 +131,6 @@ async def chat_endpoint(request: ChatRequest):
         
         final_answer = response['message']['content']
         
-        # --- Step 6: Return to Frontend ---
         return {
             "reply": final_answer,
             "route": predicted_route
