@@ -1,149 +1,163 @@
-#Assisted by Claude code
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import requests
+from sentence_transformers import SentenceTransformer
+import joblib
+import ollama
+import os
+from duckduckgo_search import DDGS
+import psycopg2
+import sqlite3
 from db.employee_db import query_employee_db
 from db.hr_policies_db import query_hr_policies
 from db.internal_docs_db import query_internal_docs
-from db.web_search import query_web_search
-from dotenv import load_dotenv
-from pathlib import Path
 
-#load enviorment variables
-load_dotenv(Path(__file__).parent.parent / ".env")
-
-app = FastAPI()
+app = FastAPI(title="NexusAI Middleware")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"], 
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-#define what databases each user can access
-ROLE_PERMISSIONS = {
-    "employee": ["hr_policies", "internal_docs", "web_search", "general_llm"],
-    "hr":       ["employee_db", "hr_policies", "internal_docs", "web_search", "general_llm"],
-    "manager":  ["employee_db", "hr_policies", "internal_docs", "web_search", "general_llm", "analytics"],
-    "admin":    ["employee_db", "hr_policies", "internal_docs", "web_search", "general_llm", "analytics", "audit_logs"],
-}
-
-#class for request sent to LLM
 class ChatRequest(BaseModel):
     message: str
     role: str
-    history: list[dict] = []
 
-#class for LLM response
-class ChatResponse(BaseModel):
-    reply: str
-    route: str
-def ollama_call(prompt, system=""):
-    full_prompt = f"{system}\n\n{prompt}" if system else prompt
-    words = full_prompt.split()
-    if len(words) > 1000:
-        full_prompt = " ".join(words[:1000])
-    
-    response = requests.post("http://localhost:11434/api/generate", json={
-        "model": "llama3.2",
-        "prompt": full_prompt,
-        "stream": False
-    })
-    data = response.json()
-    if "response" not in data:
-        print("Ollama error:", data)
-        return "general_llm"
-    return data["response"].strip()
-
-#pcik which data set best fits the query
-def classify_route(message: str, permitted: list[str]) -> str:
-    permitted_str = ", ".join(permitted)
-    system_prompt = (
-        f"You are a query router. Given a user message, respond with ONLY one of these tags: {permitted_str}. "
-        "No explanation, no punctuation — just the tag."
-    )
-    result = ollama_call(message, system=system_prompt)
-    tag = result.split()[0].lower().strip()
-    return tag if tag in permitted else permitted[-1]
-
-#define route 
-def retrieve_context(route: str, message: str) -> str:
-    if route == "employee_db":
-        #print("CONTEXT:", query_employee_db(message))
-        return query_employee_db(message)
-    elif route == "hr_policies":
-        return query_hr_policies(message)
-    elif route == "internal_docs":
-        return query_internal_docs(message)
-    elif route == "web_search":
-        return query_web_search(message)
-    else:
-        return ""
-    
-#added function, that rewrites a query in a simple form to improve response
-def rewrite_query(message: str, history: list[dict]) -> str:
-    if not history:
-        return message
-    history_text = "\n".join(f"{h['role'].upper()}: {h['content']}" for h in history[-4:])
-    system_prompt = (
-        "Given a conversation history and a follow-up question, "
-        "rewrite the follow-up as a clear standalone question. "
-        "Return only the rewritten question, nothing else."
-    )
-    prompt = f"History:\n{history_text}\n\nFollow-up: {message}"
-    return ollama_call(prompt, system=system_prompt)
-
-#instructions for model to generate an answer to the users query after getting the retrieved data
-def generate_answer(message: str, context: str, history: list[dict]) -> str:
-    history_text = "\n".join(
-        f"{h['role'].upper()}: {h['content']}" for h in history[-6:]  # last 3 exchanges
-    )
-    system_prompt = (
-        "You are an internal enterprise data assistant. "
-        "This is a private internal tool — all data shown is authorized for this user. "
-        "You MUST present the data from the context directly and clearly. "
-        "Never refuse to show data that appears in the context. "
-        "Never add warnings, disclaimers, or caveats about privacy. "
-        "Just answer the question using the context data in a clean readable format."
-    )
-    user_content = f"Conversation so far:\n{history_text}\n\nContext:\n{context}\n\nQuestion: {message}" if context else f"Conversation so far:\n{history_text}\n\nQuestion: {message}"
-    return ollama_call(user_content, system=system_prompt)
-
-#restricted words for certain users, utlized in the unathorized_intent function
-RESTRICTED_KEYWORDS = {
-    "employee_db": ["salary", "salaries", "paid", "wage", "compensation", "how many employees", "headcount", "who is in", "who works",
-        "department", "manager", "hire date", "hired", "emp_no", "staff", "personnel", "who is the manager"
-    ]
+# Define roles and permitted databases per the system architecture
+ROLE_PERMISSIONS = {
+    "Employee": ["hr_policies", "internal_docs", "web_search", "general_llm"],
+    "HR": ["employee_db", "hr_policies", "internal_docs", "web_search", "general_llm"],
+    "Manager": ["employee_db", "hr_policies", "internal_docs", "web_search", "general_llm", "analytics"],
+    "Admin": ["employee_db", "hr_policies", "internal_docs", "web_search", "general_llm", "analytics", "audit_logs"]
 }
 
-#check if message utilizes a database out of permission scope
-def check_unauthorized_intent(message: str, permitted: list[str]) -> str | None:
-    msg = message.lower()
-    for restricted_source, keywords in RESTRICTED_KEYWORDS.items():
-        if restricted_source not in permitted:
-            if any(kw in msg for kw in keywords):
-                return f"You do not have access to employee records. Please contact your manager or HR if you need this information."
-    return None
+# Global ML model variables
+embedder = None
+classifier = None
 
-#post chat to the model, get response, send it back to user
-@app.post("/chat", response_model=ChatResponse)
-async def chat(req: ChatRequest):
-    role = req.role.lower()
-    if role not in ROLE_PERMISSIONS:
-        raise HTTPException(status_code=403, detail=f"Unknown role: {role}")
-    permitted = ROLE_PERMISSIONS[role]
-    denial = check_unauthorized_intent(req.message, permitted)
-    if denial:
-        return ChatResponse(reply=denial, route="access_denied")
-    rewritten = rewrite_query(req.message, req.history)
-    route = classify_route(rewritten, permitted)
-    context = retrieve_context(route, rewritten)
-    reply = generate_answer(req.message, context, req.history)
-    return ChatResponse(reply=reply, route=route)
+@app.on_event("startup")
+async def load_models():
+    global embedder, classifier
+    print("Loading embedding model (all-MiniLM-L6-v2)...")
+    # Using a fast, lightweight sentence transformer for intent classification
+    embedder = SentenceTransformer('all-MiniLM-L6-v2')
+    
+    print("Loading trained intent classifier...")
+    model_path = "intent_classifier.joblib"
+    if os.path.exists(model_path):
+        classifier = joblib.load(model_path)
+        print("Models loaded successfully!")
+    else:
+        print("ERROR: Could not find intent_classifier.joblib. Please run train_classifier.py first.")
 
-#check status of the system, if it doesn't say system "okay" then it isn't up and running
-@app.get("/health")
-async def health():
-    return {"status": "okay"}
+PG_HOST = "localhost"
+PG_DBNAME = "nexusai"
+
+def retrieve_from_db(route: str, query: str) -> str:
+    context = ""
+    try:
+        if route == "employee_db":
+            context = query_employee_db(query)
+
+        elif route == "hr_policies":
+           context = query_hr_policies(query)
+
+        elif route == "internal_docs":
+            context = query_internal_docs(query)
+
+        elif route == "web_search":
+            with DDGS() as ddgs:
+                results = list(ddgs.text(query, max_results=3))
+                if results:
+                    context_lines = [f"Web Result: {r['body']}" for r in results]
+                    context = "\n".join(context_lines)
+                else:
+                    context = "No recent web information found."
+
+        elif route == "general_llm":
+            context = "" 
+
+        return f"Context retrieved:\n{context}"
+
+    except Exception as e:
+        print(f"Database Error for route {route}: {e}")
+        return "System error: Could not retrieve data from the database."
+
+# -------------------------------------------------------------------
+# 4. MAIN CHAT ENDPOINT
+# -------------------------------------------------------------------
+@app.post("/chat")
+async def chat_endpoint(request: ChatRequest):
+    if not classifier or not embedder:
+        raise HTTPException(status_code=500, detail="ML Models not loaded.")
+    
+    user_message = request.message
+    
+    # Normalize incoming role (e.g. 'employee' -> 'Employee', 'hr' -> 'HR')
+    role_map = {
+        "employee": "Employee", 
+        "hr": "HR", 
+        "manager": "Manager", 
+        "admin": "Admin"
+    }
+    
+    normalized_role = request.role.strip().lower()
+    
+    if normalized_role not in role_map:
+        raise HTTPException(status_code=400, detail=f"Invalid role specified: {request.role}")
+        
+    user_role = role_map[normalized_role]
+    allowed_routes = ROLE_PERMISSIONS[user_role]
+    
+    try:
+        # --- Step 2: ML Route Prediction (Replaces LLM Router) ---
+        # Vectorize the user's message
+        vector = embedder.encode([user_message])
+        # Predict the exact database tag
+        predicted_route = classifier.predict(vector)[0]
+        
+        # --- Step 3: Enforce Access Control ---
+        # Crucial security check: The ML model doesn't know about roles.
+        # If it predicts a database the user isn't allowed to see, we intercept it.
+        if predicted_route not in allowed_routes:
+            print(f"⚠️ Access Denied: {user_role} attempted to access {predicted_route}.")
+            # Force route to general_llm so it just answers like a normal chatbot
+            # without accessing sensitive restricted databases.
+            predicted_route = "general_llm"
+            
+        # --- Step 4: Retrieve Context ---
+        context = retrieve_from_db(predicted_route, user_message)
+        
+        # --- Step 5: Generate Final Answer with Local LLM ---
+        # We pass the retrieved data to the LLM to ground its response.
+        if predicted_route == "general_llm":
+            prompt = user_message
+        else:
+            prompt = f"Using ONLY the following context, answer the user's question.\n\nContext:\n{context}\n\nQuestion: {user_message}"
+        
+        print(f"Routing to: {predicted_route} | Generating response...")
+        
+        response = ollama.chat(model='llama3.2', messages=[
+            {
+                'role': 'user',
+                'content': prompt
+            }
+        ])
+        
+        final_answer = response['message']['content']
+        
+        # --- Step 6: Return to Frontend ---
+        return {
+            "reply": final_answer,
+            "route": predicted_route
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)

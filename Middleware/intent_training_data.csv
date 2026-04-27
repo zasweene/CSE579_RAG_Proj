@@ -1,0 +1,501 @@
+query,label
+Is there a maximum amount I can spend on a single expense report without approval?,hr_policies
+How do we typically handle and resolve conflicts when merging code between feature branches?,internal_docs
+Are there any restrictions on the number of dependents eligible for dependent care FSA contributions?,hr_policies
+Is there a way to search for employee reviews by skill or technology?,employee_db
+What is our total sales pipeline value for the pharmaceutical industry segment?,crm_leads
+Is there an API available to integrate with our CRM system for data retrieval?,crm_leads
+Do we have any open issues or outstanding tasks related to the ongoing platform migration project?,internal_docs
+How do I request a change to an existing technical specification document?,internal_docs
+Do remote workers get access to the same benefits as on-site employees?,hr_policies
+Is there an existing knowledge base article on best practices for secure coding techniques?,internal_docs
+Can you look up Michael Brown's PTO usage for the past 3 years?,employee_db
+Can you show me today's stock prices for Microsoft Corporation and its competitors?,web_search
+I need to find out if employee ID 67890 has any outstanding performance goals.,employee_db
+Is there a way to search by job title and get a list of all employees holding that position?,employee_db
+Can I expense a new laptop as a business expense if it's used 50% for work and 50% for personal purposes?,hr_policies
+What was the closing price of Amazon stock last Friday before market close?,web_search
+Can you give me a report on the average salary range for software engineers at our company?,employee_db
+What is the average time-to-promote for engineers at our company?,employee_db
+How many people have been vaccinated against COVID-19 worldwide as per the WHO reports?,web_search
+How many open deals do we have with clients who are also investors in our company?,crm_leads
+What are our quarterly sales targets for each individual product line?,crm_leads
+Can you provide me with a list of all active deals over $100k that were started in Q2?,crm_leads
+Can you walk me through the step-by-step process for debugging a production issue with our API?,internal_docs
+How do we currently handle backups for our critical systems?,internal_docs
+Is there a way to filter employee search results by department and job title?,employee_db
+How many people have been vaccinated against COVID-19 in the European Union as per the EU reports?,web_search
+What are the standard benefits for employees who take parental leave beyond 12 weeks?,hr_policies
+How many clients do we currently have in our pipeline who have also shown interest in our training services?,crm_leads
+Can you provide an update on the ongoing protests in Hong Kong?,web_search
+"I need to find all clients who have signed contracts worth over $750,000 in the last year.",crm_leads
+What is the average tenure of employees in our sales team?,employee_db
+Can you give me a list of all employees who have been with the company for more than 5 years?,employee_db
+Are there any active deals with a deadline within the next 30 days?,crm_leads
+How did the Dow Jones Industrial Average perform yesterday in response to the Fed's interest rate announcement?,web_search
+What is the current ranking of the top 10 cryptocurrencies in terms of market capitalization?,web_search
+Can you find me an article on the impact of the EU's new digital services tax on international e-commerce companies?,web_search
+How do I access Bob Johnson's performance review from last year?,employee_db
+What is the current unemployment rate in the US?,web_search
+How does our new authentication mechanism compare to the previous one implemented in 2015?,internal_docs
+How do today's stock prices for Google compare to their IPO price in 2004?,web_search
+"How many clients have we signed contracts with in the past quarter that are worth over $100,000?",crm_leads
+Can you show me all open deals that have been pending for over 90 days and their respective values?,crm_leads
+How do I retrieve a copy of the company's intellectual property policy?,internal_docs
+What is the average cost of a new iPhone in different markets worldwide?,web_search
+What are the company's policies and procedures for handling confidential information and proprietary data during remote work?,hr_policies
+What is our current pipeline value for the Smith account?,crm_leads
+What is the process for reporting and resolving conflicts with coworkers or supervisors?,hr_policies
+Is there any information available on our quarterly sales targets for marketing campaigns?,crm_leads
+Is there a way to see all employees with more than 5 years of service at the company?,employee_db
+I'm trying to identify trends - can you give me a breakdown of our quarterly sales targets over the past year?,crm_leads
+How do I request access to the engineering architecture diagrams for a specific project?,internal_docs
+What's the current state of the global chip shortage affecting automakers?,web_search
+Can you give me access to Tom Harris' personnel file?,employee_db
+Can you show me John Doe's PTO balance as of last quarter?,employee_db
+What is our current sales pipeline status for client Johnson & Co.?,crm_leads
+Are there any ongoing developments on the Amazon Luna cloud gaming platform?,web_search
+Are there any specific rules or guidelines for reporting expenses related to travel or entertainment?,hr_policies
+Can you retrieve a list of all active deals with contract values over $50k?,crm_leads
+How do we currently integrate with the popular third-party authentication library?,internal_docs
+Can I get a list of all employees who have received promotions in the past year?,employee_db
+What are some key takeaways from the recent G7 summit?,web_search
+I'm trying to find all employees who have worked on project Y; can you give me their names and job titles?,employee_db
+What is the current job title and department for Michael Brown?,employee_db
+Is there a way to search for employee performance reviews by project or manager?,employee_db
+I need to retrieve all deals with a contract value above $2 million and an end date within the next 6 months.,crm_leads
+Can you provide today's stock prices for Apple and Google?,web_search
+"What is our total quarterly sales target for Q4, and what percentage of that have we already met?",crm_leads
+Can you provide me with a list of approved vendors for procurement and procurement processes?,internal_docs
+Do we have any existing documentation on implementing secure communication protocols for cloud-based services?,internal_docs
+What is the average salary range for software engineers with 5-7 years of experience in our company?,employee_db
+How do I ensure compliance with our company's data security policies when working remotely?,hr_policies
+Is there a way to look up all employees with the same manager as Sarah Lee?,employee_db
+Can I access information on the history of our company's major product updates?,internal_docs
+Where can I find historical data on project timelines and milestones?,internal_docs
+How do I request a flexible schedule to accommodate a medical condition?,hr_policies
+How do today's stock prices for Amazon compare to their 52-week low?,web_search
+Can you generate a report showing all client names and their corresponding deal values?,crm_leads
+Can you provide me with a copy of the standard operating procedure for handling customer complaints?,internal_docs
+What are the current performance metrics and benchmarks for our company's mainframe infrastructure?,internal_docs
+Can I get a list of all the active maintenance contracts for our legacy software products?,internal_docs
+"How many times can an employee take advantage of the company's ""summer hours"" program per year?",hr_policies
+How many days of PTO does Jane Doe currently have remaining?,employee_db
+Can you provide a list of all clients with outstanding deals valued over $1 million?,crm_leads
+Can you provide more information on the company's disaster recovery process and procedures?,internal_docs
+Are there any notable updates on the development of the new SpaceX Starship prototype?,web_search
+Can I carry over unused paid time off to the next year?,hr_policies
+Can I take a break during work hours to attend to my child's school needs?,hr_policies
+What is the PTO policy for new hires at our company?,employee_db
+How do I request a flexible schedule or telecommuting arrangement?,hr_policies
+I need information on the latest quarterly earnings report from Microsoft.,web_search
+How many hours of overtime has James Chen worked this quarter?,employee_db
+Do employees have access to an employee assistance program (EAP) for mental health support?,hr_policies
+Are there any updates to the standard operating procedures for handling confidential customer data?,internal_docs
+"What is the status update on contract XYZ, and what are the next steps to close this deal?",crm_leads
+"What is the highest level of education completed by our CEO, John Doe?",employee_db
+Can I view my own performance review from last quarter online?,employee_db
+What is the company policy on parental leave and how does it apply to new parents with multiple children?,hr_policies
+Can you provide an update on the ongoing wildfires in Australia and their impact on global carbon emissions?,web_search
+How many quarterly sales targets did we miss by more than 10% last year?,crm_leads
+How do I ensure my employee ID and password are secure while working from home?,hr_policies
+Can I access a diagram of the current data pipeline architecture for analysis?,internal_docs
+What is the current sales pipeline for client XYZ and what are the next steps in closing this deal?,crm_leads
+Are there any notable awards or recognitions given to women in STEM recently?,web_search
+Do you have access to real-time market data on Netflix's stock performance?,web_search
+Can you provide me with access to the historical database of project timelines and milestones?,internal_docs
+Can you give me a list of all employees who have received a promotion in the past 6 months?,employee_db
+"What's the average time-to-close for all deals in the ""proposal"" stage?",crm_leads
+Can I view Jane Doe's PTO balance for this quarter?,employee_db
+Are there any standard templates or tools for creating project plans and resource allocation schedules?,internal_docs
+Can I take time off to care for a sick family member without using vacation days?,hr_policies
+How many employees have completed more than 10 years of service at our company?,employee_db
+Can I expense a new phone as a business expense if it's used 75% for work and 25% for personal purposes?,hr_policies
+How many deals did we close last year that were worth more than $1 million?,crm_leads
+Where can I find the original design documents for our flagship product's user interface?,internal_docs
+Is there a way to access historical data on COVID-19 cases worldwide?,web_search
+Can I access the database with engineering architecture diagrams for project XYZ?,internal_docs
+I need to track down a specific deal - can you give me all the details on the contract with client ABC that was started last month?,crm_leads
+I need to find recent news articles about AI-powered robots.,web_search
+Can I use my flexible work hours to take care of a family emergency during remote work days?,hr_policies
+Is there a maximum number of paid parental leave days allowed per child?,hr_policies
+Are there any specific rules or guidelines for reporting stock options or equity awards received as part of my compensation package?,hr_policies
+"Get me a report on all clients who have signed multiple contracts worth over $500,000 in the past year.",crm_leads
+What is the current architecture diagram for our cloud-based infrastructure?,internal_docs
+I'm trying to locate an old email that mentions Karen Taylor's project goals from Q1 last year.,employee_db
+How do we request a modification to our standard job duties or responsibilities under the Family and Medical Leave Act (FMLA)?,hr_policies
+How many vacation days does Rachel Chen have left after taking time off last month?,employee_db
+Is there a database that tracks real-time updates on wildfires around the world?,web_search
+I need a list of clients with open contracts in the finance industry.,crm_leads
+Who are some of the most experienced project managers at our company?,employee_db
+What was the date of our company's founding?,internal_docs
+Can you show me the top 5 clients by contract value in our database?,crm_leads
+"What is the current status of our patent applications for ""SmartHome"" technology?",internal_docs
+Can you provide information on the recent G7 summit and its outcomes regarding climate change and global cooperation?,web_search
+Are there any specific guidelines or best practices for testing RESTful APIs using Postman?,internal_docs
+Where can I find information on updating our company's knowledge base to reflect recent changes in industry regulations?,internal_docs
+Can I access the company's database for historical data on our flagship product's development timeline?,internal_docs
+How do we currently handle and document knowledge transfer between team members?,internal_docs
+Can you give me an update on Tom Harris' PTO usage this year?,employee_db
+Can you show me all deals that were started within the past 3 months and have a contract value above $50k?,crm_leads
+What is Sarah Johnson's current job title and department?,employee_db
+I need to know what happened in the latest Brexit update.,web_search
+What are some key highlights from the latest quarterly report by Amazon Web Services?,web_search
+Are there any specific rules or guidelines for reporting gifts or meals related to client meetings?,hr_policies
+How do I request additional time off for a medical procedure or treatment?,hr_policies
+What are the key takeaways from our team's project plan review last quarter?,internal_docs
+What are the key steps for onboarding new team members to our company's GitFlow workflow?,internal_docs
+How does the new database schema align with our previous data warehousing solutions?,internal_docs
+How do we currently handle scalability and performance issues with our existing infrastructure?,internal_docs
+"I need to find John Smith's review from Q1 last year, can you retrieve that?",employee_db
+Is there a maximum amount that can be spent on business expenses per quarter?,hr_policies
+How many times can an employee request and approve their own time-off requests per year?,hr_policies
+Can you explain the company's policy on using company-owned devices for personal use outside of work hours?,hr_policies
+Can you give me access to Emily Chen's performance review from Q1 last year?,employee_db
+Is there any information available on the recent proposal sent to the Wilson account?,crm_leads
+Can I get an update on the latest Tesla earnings report?,web_search
+Is there a centralized database where we can track employee training and certifications?,employee_db
+How many deals are currently pending signature or have been recently closed?,crm_leads
+"Is there a way to filter our sales pipeline by industry, specifically focusing on healthcare and finance?",crm_leads
+What is our total sales value for the healthcare industry segment so far this quarter?,crm_leads
+Is there a new development on the COVID-19 vaccination front?,web_search
+"Can I use my PTO to care for a sick family member, and if so, what is the maximum number of days allowed?",hr_policies
+Do we have any sales data from previous quarters that we can use for historical context?,crm_leads
+Are there any sales metrics or KPIs that are tracked on a weekly basis?,crm_leads
+Can I use my own computer or device for remote work as long as it meets the company's security standards?,hr_policies
+Can I request a flexible schedule under our remote work policy if my child's school has an early release day?,hr_policies
+I need to find all employees who have worked on project X; can you give me their names and job titles?,employee_db
+What is the current global COVID-19 vaccination rate?,web_search
+How do we request a reasonable accommodation under the Pregnancy Discrimination Act (PDA) and what is the typical approval process?,hr_policies
+"Is there a way to filter deals by stage (e.g. demo, proposal, signed) for reporting purposes?",crm_leads
+What was the original architecture for our company's data processing pipeline in 2018?,internal_docs
+"What is our quarterly sales target for the current quarter, and how are we tracking so far?",crm_leads
+Do we have any data on the top-performing sales reps in terms of deal value?,crm_leads
+What are the company's policies on open-source contributions from employees?,internal_docs
+Can you provide me with a list of recent acquisitions made by Salesforce Inc.?,web_search
+Can you provide data on the top 10 most valuable tech companies by market capitalization?,web_search
+What is John Smith's current PTO balance?,employee_db
+What are the typical challenges we face when integrating third-party APIs into our system architecture?,internal_docs
+Which sales reps are currently handling multiple deals worth over $1 million combined?,crm_leads
+When did we first start using agile methodologies in our development workflow?,internal_docs
+Can you provide data on the top 5 most valuable cryptocurrency exchanges by trading volume?,web_search
+Is there anything noteworthy about this year's Academy Awards ceremony?,web_search
+What are the key differences between our current and proposed database schema designs?,internal_docs
+How does the new project management tool integrate with our existing workflow tools?,internal_docs
+What is the average salary range for software engineers in our department?,employee_db
+How many quarterly sales targets have been met so far this year for our North American region?,crm_leads
+What is the average salary range for senior developers at our company?,employee_db
+Are there any specific rules governing employee social media usage on company time?,hr_policies
+How do I check my own salary information in the employee portal?,employee_db
+"What is Sarah Lee's job description, responsibilities, and required skills?",employee_db
+Are there any specific formatting guidelines for writing technical documentation?,internal_docs
+How do I submit my expense report for reimbursement?,hr_policies
+What are the top 5 most valuable cryptocurrencies currently traded?,web_search
+"Can you retrieve all active deals with a contract value above $500,000?",crm_leads
+Are there any deals that were put on hold due to recent budget changes at the client's end?,crm_leads
+I need information on the recent wildfires affecting California.,web_search
+Can I expense travel costs for a business trip with my family?,hr_policies
+How do I access the performance review for Jane Doe from last quarter?,employee_db
+"How many clients have we had repeat business from in the past year, and what were their contract values?",crm_leads
+What is the current market value of Apple Inc.'s stock?,web_search
+Is there a limit on the number of expenses I can submit per month for reimbursement?,hr_policies
+What is the current status of the COVID-19 pandemic globally?,web_search
+What are the company's rules regarding social media usage during work hours?,hr_policies
+Are there any notable updates on the development of the new Ford F-150 electric pickup truck?,web_search
+Are there any internal guidelines for writing readable and maintainable code?,internal_docs
+Can you provide an example of how we would implement a circuit breaker pattern for handling retries in our Java application?,internal_docs
+How has the pandemic affected the global supply chain and international trade so far?,web_search
+How does the new product roadmap align with our existing business goals and objectives?,internal_docs
+Get me a report on quarterly sales targets met for each product line so far this year.,crm_leads
+What is the process for disputing an expense report rejection and who can assist with this process?,hr_policies
+Get me a list of all closed deals in the past year that were worth over $1 million.,crm_leads
+How many PTO days does the average full-time employee have left per year?,employee_db
+What are the standard benefits for employees who adopt a child?,hr_policies
+How many employees have received promotions within the past 6 months?,employee_db
+Do we have any new opportunities in the database for the energy sector this quarter?,crm_leads
+Where can I find information on company policies regarding employee data privacy and security?,internal_docs
+Can you provide information on the parental leave benefits offered to new mothers at our organization?,hr_policies
+What are the key performance indicators for our engineering team's productivity metrics?,internal_docs
+Can you provide a diagram of the current cloud infrastructure setup for our services?,internal_docs
+How do I ensure compliance with our company's accessibility policies when designing digital products?,hr_policies
+How much has the S&P 500 index dropped since its peak in February due to the pandemic's economic effects?,web_search
+What is the current price per barrel of West Texas Intermediate crude oil?,web_search
+What is the current exchange rate between the US dollar and the euro?,web_search
+What is the typical workflow for requesting and approving changes to the engineering architecture?,internal_docs
+Can I use my company-issued phone for personal use during non-work hours?,hr_policies
+How many days of paid vacation time are available to employees per year and can I carry over unused time to the next year?,hr_policies
+Can you provide me with a detailed breakdown of the system requirements for our new product line?,internal_docs
+Can you provide information on our company's policy on using personal vehicles for business purposes and what expenses are reimbursable?,hr_policies
+Can you provide a list of approved vendors for cloud-based storage solutions?,internal_docs
+What's the current status of our sales pipeline for Q2?,crm_leads
+How do I find out when John Smith's next review is scheduled?,employee_db
+What are the current prices for Bitcoin and Ethereum?,web_search
+Can you give me a list of all employees who have taken more than 2 weeks off for parental leave?,employee_db
+Can you give me an overview of our current technology stack and how it supports our business objectives?,internal_docs
+How did the Chinese stock market react to the announcement of a phase-one trade deal with the US?,web_search
+Are there any additional benefits offered by the company for employees with disabilities?,hr_policies
+Is there a cap on the number of dependents eligible for spousal benefits?,hr_policies
+How do we typically prioritize feature requests and backlog items for our product development teams?,internal_docs
+Is there a minimum amount of paid time off required each year?,hr_policies
+Do you have any information on the company's history with acquisitions and mergers?,internal_docs
+What is the average salary range for someone with 5+ years of experience in our company?,employee_db
+When did we start using cloud-based services for data storage and processing?,internal_docs
+What is John Smith's current PTO balance?,employee_db
+Is there any information available on the Thompson deal that was delayed last quarter?,crm_leads
+"Can you show me all active deals in the IT sector with a value above $500,000?",crm_leads
+Can you provide a list of recently announced product launches in the tech industry?,web_search
+Is there a database of notable IT conferences happening this quarter?,web_search
+"When did we release our flagship product, ""SmartHome""?",internal_docs
+Are there any best practices or guidelines for testing and deploying machine learning models in production environments?,internal_docs
+What's the current total revenue generated from all closed deals this quarter?,crm_leads
+How does the Dow Jones Industrial Average index perform during the month of January historically?,web_search
+Can you show me the personnel files for all employees in the marketing department?,employee_db
+What is the typical approval process for employee requests for additional equipment or software for remote work purposes?,hr_policies
+I need to check if Emily Patel's performance review from last year is available online.,employee_db
+"I'm trying to recreate a report from 2019, can I access the original data used in that report?",internal_docs
+What is the historical context behind our company's first product launch?,internal_docs
+I'd like to know more about the latest breakthroughs in cancer research.,web_search
+Is there a way to look up employee reviews for specific projects they've worked on?,employee_db
+What are the standard benefits for employees who experience a serious illness or injury that requires extended medical leave?,hr_policies
+What is our company's policy on parental leave for adoptive parents?,hr_policies
+What is our company's policy on parental leave for new parents of twins?,hr_policies
+Are there any internal policies governing the use of third-party APIs in our products?,internal_docs
+Is there a way to see which departments have the most employee turnover in the past year?,employee_db
+Are there any restrictions on using company equipment for personal use?,hr_policies
+Is there any recent news or updates on the development of self-driving cars by Waymo and other major players?,web_search
+Is there any news on the development of a COVID-19 vaccine for children?,web_search
+Can you explain the company's policy on using company-provided phones for personal use outside of work hours?,hr_policies
+Where can I find information on our company's security policies and compliance procedures?,internal_docs
+Is Elon Musk's net worth still above $200 billion after Tesla's recent quarterly earnings report?,web_search
+Can we filter by client name and only show deals that have a high likelihood of closure?,crm_leads
+What are our current quarterly sales targets for the healthcare industry?,crm_leads
+"What's the average contract value for all deals in the ""demo"" stage?",crm_leads
+What are our quarterly sales targets for the Q3 period?,crm_leads
+How many contracts have been signed with clients from a specific industry (e.g. finance) over the past year?,crm_leads
+Do we have any open vacation slots for the upcoming holiday season?,employee_db
+What's the average contract value for all closed deals in the past 6 months?,crm_leads
+How many vacation days do new hires receive in their first year with the company?,hr_policies
+I'm looking for a list of all employees who work remotely at least 2 days a week.,employee_db
+Does anyone else have a higher seniority level than Michael Brown?,employee_db
+Can I use my company-issued laptop for personal projects outside of work hours?,hr_policies
+How did the Dow Jones Industrial Average perform yesterday?,web_search
+"Get me a report on all closed deals in the past 6 months with contract values above $200,000.",crm_leads
+Are there any available resources containing information on recent natural disasters worldwide?,web_search
+How many deals are currently being negotiated for closure within the next 60 days?,crm_leads
+Are there any new leads from the recent trade show that need to be followed up on?,crm_leads
+Can you provide me with a list of all clients who have signed contracts worth more than $500k in the past 6 months?,crm_leads
+Is there a way to filter deals by region or industry for reporting purposes?,crm_leads
+What's the current status of the Smith account in our sales pipeline?,crm_leads
+Can you give me some insight into Google's recent AI advancements?,web_search
+What is our company's policy on parental leave for adoptive parents?,hr_policies
+What is the total contract value of all active deals in our pipeline right now?,crm_leads
+What is the current market capitalization of Apple Inc. after their latest quarterly earnings report?,web_search
+How many employees have a master's degree or higher in our company?,employee_db
+I need to find all clients who have exceeded their quarterly sales targets by more than 10%.,crm_leads
+How do I submit a request for a work-from-home arrangement?,hr_policies
+Are there any specific rules or guidelines for reporting foreign gifts or benefits received from clients or vendors?,hr_policies
+"I need to find out when Sarah Lee's birthday is, can you tell me her employee ID number?",employee_db
+Is there a way to track which sales reps are responsible for closing deals over a certain value (e.g. $100k)?,crm_leads
+What is the current PTO balance for employee ID 12345?,employee_db
+Is there a cap on the number of dependents eligible for health insurance coverage through the company?,hr_policies
+How do we submit expense reports for business travel and what are the reimbursement limits for meals and incidentals?,hr_policies
+What is the company policy on taking breaks during the workday?,hr_policies
+Can you show me Sarah Lee's performance metrics for the past quarter?,employee_db
+"Can you retrieve a list of all active deals over $500,000 in value?",crm_leads
+Do we have any employee wellness programs that focus on stress management and resilience?,hr_policies
+What is the average tenure of employees in the marketing department?,employee_db
+"I need to retrieve a list of all employees who have worked on project X, where can I find this information?",internal_docs
+Can you find recent news articles about the ongoing COVID-19 pandemic in the US?,web_search
+Do we have any discounts or perks for employees who participate in company-sponsored wellness programs?,hr_policies
+Can you give me today's closing price for Apple Inc. stock?,web_search
+What are the requirements for filing a formal complaint about workplace harassment?,hr_policies
+Can you tell me what Sarah Lee's job description is currently?,employee_db
+How do we currently handle and prioritize support tickets in our JIRA instance?,internal_docs
+"Can you retrieve all active deals in the Americas region with a contract value over $100,000?",crm_leads
+I need to find out if employee ID 34567 has any current performance goals that are not yet complete.,employee_db
+Can you look up Jane Doe's salary history for the past year?,employee_db
+What are some current trends in sustainable energy development?,web_search
+Can you give me an overview of our company's current IT infrastructure and how it supports business operations?,internal_docs
+Can you provide a detailed breakdown of the current project timeline?,internal_docs
+Can you search our database for any open opportunities at General Electric?,crm_leads
+Is there any recent news on the development of a COVID-19 vaccine by Moderna Therapeutics?,web_search
+What are the key considerations when evaluating potential cloud service providers for our organization's needs?,internal_docs
+How many new deals were added to the pipeline last week?,crm_leads
+How did the European Union's economy perform in 2022 compared to previous years?,web_search
+How many deals are we currently working on that are worth more than $200k each?,crm_leads
+Has there been any significant news on climate change in the past week?,web_search
+How do we currently handle incident response for service outages on weekends?,internal_docs
+Can I take a short-term leave of absence to attend to a personal matter?,hr_policies
+What are the guidelines for reporting an accident or injury in the workplace?,hr_policies
+Are there any new leads from the online advertising campaign that need to be followed up on?,crm_leads
+What's the current interest rate set by the Federal Reserve?,web_search
+Are there any special considerations or accommodations for employees with disabilities?,hr_policies
+Do we have any documentation on best practices for coding in Python?,internal_docs
+Can you provide information on recent breakthroughs in cancer research?,web_search
+What are our company's policies regarding gender-affirming care and family leave?,hr_policies
+What are the key performance indicators for measuring successful project delivery in our organization?,internal_docs
+How many deals are currently being managed by our sales team leader?,crm_leads
+What's the total contract value of all deals with XYZ Corporation this quarter?,crm_leads
+Is there a way to track employee commuting patterns and modes of transportation?,employee_db
+Is there any news on the ongoing climate change negotiations at COP27?,web_search
+How much did the S&P 500 drop last quarter?,web_search
+Can you provide me with information on the company's history with major partnerships and collaborations?,internal_docs
+Can you show me all active deals for the software division with a current value of at least $500k?,crm_leads
+How many people have been affected by the recent wildfires in California according to official reports?,web_search
+What is the current sales pipeline status for client Smithson Inc?,crm_leads
+How do I submit an expense report when traveling internationally for business?,hr_policies
+What are the top three clients we're working with this quarter on a contract worth over $200k?,crm_leads
+What's the current state of the global oil production and demand?,web_search
+Can you give me the latest news on NASA's Artemis program?,web_search
+How many people have been vaccinated against COVID-19 globally so far?,web_search
+What is the process for resolving disputes over work-life balance with managers or HR?,hr_policies
+Are there any specific guidelines for submitting expense reports using company credit cards?,hr_policies
+Do we have any company-wide policies or guidelines for handling confidential information while working remotely?,hr_policies
+Where can I find detailed instructions on setting up a new developer workstation?,internal_docs
+Do you have access to the latest job market data from the Bureau of Labor Statistics?,web_search
+Are today's stock prices for Google's parent company Alphabet Inc. higher than they were last quarter?,web_search
+Do you have any information on our company's standard sick leave policies including accrual rates and maximum usage limits?,hr_policies
+How do I find out which employees are eligible for the new parental leave policy?,employee_db
+What is the total value of all active deals in the software sector?,crm_leads
+Are there any resources available for understanding the underlying infrastructure of our cloud-based services?,internal_docs
+What is Tom Harris' current salary and bonus information?,employee_db
+What is the standard procedure for reporting a security incident in the office?,hr_policies
+What is the process for requesting a salary adjustment or bonus?,employee_db
+How do I access Tom Harris's salary information from the past three years?,employee_db
+Is there any news on the development of a new 5G network by Verizon in the United States?,web_search
+Do we have any company-wide policies or guidelines for dealing with inclement weather while working remotely?,hr_policies
+Where can I find the latest version of our project management guidelines for agile development?,internal_docs
+How many clients have we closed this quarter so far?,crm_leads
+"What are our current quarterly sales targets for each region, globally?",crm_leads
+How do we typically handle and resolve conflicts or disputes within our development teams?,internal_docs
+What is the process for requesting and approving a family leave under our parental leave policy?,hr_policies
+What was the scope of work involved in the 2020 infrastructure upgrade project?,internal_docs
+How do I update my password in the internal database?,internal_docs
+Are there any notable changes to tax laws or regulations that I should be aware of?,web_search
+How many employees have taken advantage of our flexible work-from-home policy?,employee_db
+How many vacation days does Emily Chen have left in her bank?,employee_db
+Can you show me a list of all employees in the marketing department who have more than 10 years of service?,employee_db
+"How many paid vacation days do we get per year, and can they be carried over to the next year if not used?",hr_policies
+Do we have any employees who are working remotely full-time?,employee_db
+Do we offer any employee assistance programs for mental health support?,hr_policies
+How do I access Michael Brown's training records and certifications?,employee_db
+Do you have any information on the ongoing NASA Mars rover mission?,web_search
+Can you provide a breakdown of quarterly sales targets by product line for Q2 and Q3?,crm_leads
+Are there any specific rules or guidelines for reporting and reimbursing expenses related to employee relocation?,hr_policies
+Is there a way to look up employee information by manager or department?,employee_db
+Do we have any employees who are near or over the maximum PTO allotment for the year?,employee_db
+Where can I find the latest version of our software development life cycle documentation?,internal_docs
+Are there any recent changes to GDPR regulations?,web_search
+Are there any guidelines for sharing company intellectual property on public platforms?,hr_policies
+Can I take time off to attend my child's school event without prior approval?,hr_policies
+"Do you have any information on our company's standard benefits package including health, dental, and vision insurance?",hr_policies
+How do I request access to an employee's performance review?,employee_db
+How many days of bereavement leave am I entitled to take?,hr_policies
+"I need to access historical records on our company's IT asset management system, where do I start?",internal_docs
+How many hours of overtime did Tom Johnson work in Q2 last year?,employee_db
+Can I see a list of all clients we've worked with in the past year and their corresponding contract values?,crm_leads
+"I need to analyze deal velocity - can you provide me with a list of all deals by their start date, sorted by close date?",crm_leads
+What is the typical approval process for employee requests for temporary adjustments to their work schedule due to family emergencies?,hr_policies
+Where can I find information on our company's data retention policies and GDPR compliance?,internal_docs
+Where can I find information on the company's security protocols for sensitive data transmission?,internal_docs
+What is the current market capitalization of Apple Inc.?,web_search
+What is the current state of development for electric vehicle charging infrastructure?,web_search
+What are the procedures for reporting and investigating suspected cases of workplace bullying?,hr_policies
+Is there a database of notable cybersecurity conferences happening this year?,web_search
+Can you point me to the relevant section in our standard operating procedures for handling sensitive data?,internal_docs
+Are there any notable events happening this weekend that I should be aware of?,web_search
+"What is the current status of the Johnson account, which was previously valued at $250,000?",crm_leads
+Can you tell me how much vacation time Michael Brown has left this year?,employee_db
+What is the process for handling and resolving software defects or bugs in production environments?,internal_docs
+Is there a minimum amount of PTO required before taking parental leave?,hr_policies
+What are the companywide PTO policies regarding summer hours?,employee_db
+"Can you retrieve all deals with a start date within the last 3 months and contract value above $500,000?",crm_leads
+How many quarterly sales targets did we exceed last year for the cloud services division?,crm_leads
+What is the current ranking of the top 10 countries by nominal GDP per capita?,web_search
+Can you show me a list of employees who have taken more than 10 days off in the past quarter?,employee_db
+"What was the original vision and goals behind our company's flagship product ""SmartHome""?",internal_docs
+Can we filter by region and only show deals that have a high likelihood of closure?,crm_leads
+How do we typically handle and resolve software defects in production environments?,internal_docs
+What is the average tenure of our engineering team members?,employee_db
+What are the most recent updates on the development of self-driving cars?,web_search
+What is the average contract value for deals won by our top-performing sales rep?,crm_leads
+What is the average contract value of our deals in the sales pipeline right now?,crm_leads
+What were the primary drivers behind our company's decision to adopt a DevOps approach?,internal_docs
+What are the eligibility requirements for our employee stock purchase plan?,hr_policies
+Can you give me the latest update on the COVID-19 vaccine development?,web_search
+What was the initial architecture design for our flagship product in 2018?,internal_docs
+What are our company's policies regarding same-sex partner benefits and family leave?,hr_policies
+Is there a way to access data on global poverty rates and statistics?,web_search
+How do I retrieve Emily Chen's personnel file from HR?,employee_db
+Are there any specific rules or guidelines for reporting gifts and gratuities received from clients or vendors?,hr_policies
+What is the process for requesting a flexible work schedule and who approves these requests?,hr_policies
+What are the most recent performance review dates for team members in the software engineering department?,employee_db
+What are the salary ranges for managers in our company across different departments?,employee_db
+How has the global economy been affected by the pandemic so far?,web_search
+What is the company's policy on carrying over unused PTO from one year to the next?,employee_db
+Can you give me a report on our top-performing sales reps by quarterly sales targets met or exceeded?,crm_leads
+How many contracts worth more than $500k have been signed in the past 12 months?,crm_leads
+What is our company's policy on remote work arrangements for employees in managerial positions?,hr_policies
+What is the typical process for escalating critical issues to upper management?,internal_docs
+What is the average cost of a college education in the United States for the past 3 years?,web_search
+Are there any ongoing investigations or scandals related to corporate malfeasance in the tech industry?,web_search
+How has our company's approach to DevOps evolved over the past five years?,internal_docs
+Can you provide a diagram illustrating the network topology used in our 2020 cloud migration project?,internal_docs
+What were the key considerations when designing the original architecture for our flagship product?,internal_docs
+Are there any standard operating procedures for handling code reviews and merge requests?,internal_docs
+Can I use my company-issued laptop for personal use during non-work hours?,hr_policies
+Who are some of the top performers in the data science team based on their most recent reviews?,employee_db
+What is the average deal size of all deals that were closed in Q3?,crm_leads
+What is the current unemployment rate in the state of California?,web_search
+Do we have any clients named Johnson currently in the proposal stage?,crm_leads
+What's the total value of all pending contracts in the northeast region?,crm_leads
+I need to find all employees who have worked on project Z; can you give me their names and job titles?,employee_db
+How do I request a flexible schedule to accommodate a doctor's appointment?,hr_policies
+Can I use my paid time off to care for a sick family member?,hr_policies
+Can I get a list of employees who have taken more than two weeks of PTO in the past six months?,employee_db
+Do we have any standard operating procedures for handling critical errors in the manufacturing process?,internal_docs
+Can you filter all active deals by region and provide a summary of each area's pipeline value?,crm_leads
+What is the company policy on carryover PTO into the new year?,employee_db
+Can you provide a step-by-step guide on how to troubleshoot common errors in our API gateway?,internal_docs
+What are the current interest rates offered by major banks?,web_search
+"Can you provide me with an overview of our active deals by product category, including a breakdown by region?",crm_leads
+Is there a way to track the source of each new deal added to the pipeline?,crm_leads
+Can I use my paid time off to care for an aging parent living in another country?,hr_policies
+Can I work from home if my child is sick and I need to care for them?,hr_policies
+What is John Smith's job title and department?,employee_db
+Can you show me today's high and low stock prices for Apple Inc.?,web_search
+Are there any standard operating procedures for deploying new code to production environments?,internal_docs
+How does our company handle employee confidentiality agreements for new hires?,internal_docs
+What are the current security protocols for remote access to our servers?,internal_docs
+Can you show me a list of all employees who have been with us for more than 15 years?,employee_db
+Are there any ongoing protests or demonstrations around the world related to climate change and environmental issues?,web_search
+How many times has John Smith been promoted since joining our company?,employee_db
+Is there a limit on the number of paid parental leave days available?,hr_policies
+Can you provide me with a list of all clients who have exceeded their quarterly sales targets twice in the past year?,crm_leads
+How do we go about requesting a reasonable accommodation under the Americans with Disabilities Act (ADA)?,hr_policies
+Can you provide information on recent mergers and acquisitions in the tech industry?,web_search
+"Can I see the personnel file for David Kim, specifically his education background?",employee_db
+Where is the documentation for our custom-built workflow automation tool?,internal_docs
+Can you find me an article on the impact of blockchain technology on supply chain management and logistics?,web_search
+What are the top 5 highest-paid employees in our company right now?,employee_db
+I need a summary of the top headlines from yesterday's Financial Times.,web_search
+Can you explain the reasoning behind choosing React as our frontend framework of choice?,internal_docs
+What is the current ranking of the top 10 most valuable companies in the world?,web_search
+Can you give me a list of all active deals in the technology sector with contract values above $3 million?,crm_leads
+What is the most recent update to our company's data encryption protocols?,internal_docs
+Can you show me Sarah Lee's individual performance review from Q2 last year?,employee_db
+Do we have any documentation on guidelines for writing technical reports?,internal_docs
+Can you provide a breakdown of contract values by industry for all active deals?,crm_leads
+Is there a way to view an employee's performance review from previous years?,employee_db
+How do I request an extension on my existing PTO days?,employee_db
+I need to know if Maria Rodriguez has used all her available vacation time this year.,employee_db
+Can you provide me with a list of recent NASA missions to Mars?,web_search
+"What is our company's policy on using company resources (e.g., phones, laptops) for personal use?",hr_policies
+How many people were affected by the recent natural disaster in Japan?,web_search
+What is the average cost of a gallon of gasoline in the United States for the past year?,web_search
+"What is John Smith's PTO balance, and how many days does he need to take off before it rolls over?",employee_db
+Can you give me a breakdown of contract values by region or industry for the past year?,crm_leads
+How many people have been affected by the recent floods in Bangladesh according to UN reports?,web_search
+What are the rules regarding outside employment or consulting while working at the company?,hr_policies
+Can you show me the salary range for a new hire in the marketing department?,employee_db
+Are there any available databases containing information on ongoing space missions?,web_search
